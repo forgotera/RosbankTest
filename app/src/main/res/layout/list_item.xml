@@ -5,16 +5,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/inputField"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:hint="@string/price"
-            android:gravity="center"
-    />
-
     <RelativeLayout
             android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
@@ -28,6 +18,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/charCode"
             android:text="USD"
+            android:textColor="@android:color/black"
             android:layout_gravity="center"
             android:layout_alignParentStart="true"
         />
@@ -49,9 +40,17 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/value"
                 android:text="1213"
+                android:textColor="@android:color/black"
                 android:layout_gravity="right"
                 android:layout_alignParentEnd="true"
         />
+
+        <View android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:background="@android:color/darker_gray"
+              android:layout_marginStart="8dp"
+              android:layout_marginEnd="8dp"
+              android:layout_below="@id/name"/>
 
     </RelativeLayout>
 

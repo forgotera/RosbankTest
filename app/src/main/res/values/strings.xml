@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">RosbankTest</string>
-    <string name="price">Введите число в р</string>
+    <string name="price">Введите сумму</string>
 </resources>

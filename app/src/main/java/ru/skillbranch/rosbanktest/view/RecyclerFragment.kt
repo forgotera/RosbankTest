@@ -34,10 +34,11 @@ class RecyclerFragment: Fragment(),RecyclerFragmentView {
         mRecyclerView = view.findViewById(R.id.recyclerview)
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
 
-        //получение данных
+        //связывание c presenter
         if (mCurrencyPresenter == null){
             mCurrencyPresenter = CurrencyPresenter(this)
         }
+        //получение данных
         mCurrencyPresenter!!.getCurrencyData()
 
         return view
@@ -51,6 +52,12 @@ class RecyclerFragment: Fragment(),RecyclerFragmentView {
     override fun updateUI() {
         mAdapter!!.notifyDataSetChanged()
     }
+
+
+    fun cliclEditText(price:String){
+        mCurrencyPresenter!!.recalculationSum(price)
+    }
+
 
     private inner class CurrencyAdapter(val data: MutableList<Currency?>): RecyclerView.Adapter<CurrencyAdapter.CurrencyHolder>(){
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyHolder {

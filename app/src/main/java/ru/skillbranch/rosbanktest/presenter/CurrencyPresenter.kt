@@ -13,10 +13,10 @@ import ru.skillbranch.rosbanktest.view.RecyclerFragment
 class CurrencyPresenter(private val view: RecyclerFragment) {
     var valuteList:MutableList<Currency?> = mutableListOf()
     val disposable = CompositeDisposable()
+    var recalculationList:ArrayList<Double> = arrayListOf()
+    //получение данных о валюте
     fun getCurrencyData() {
         val networkService = ListOfCurrencies.create()
-
-        view.setAdapter(valuteList)
 
         val observable = networkService.getValute()
             .observeOn(AndroidSchedulers.mainThread())
@@ -29,17 +29,28 @@ class CurrencyPresenter(private val view: RecyclerFragment) {
     //успешный запрос
     private fun handleResponse(answer:JsonAnswer) {
         //изменение данных
-        Log.d("reponce234","${answer.valute}")
         for( (_,value) in answer.valute ){
             valuteList.add(value)
+            recalculationList.add(value.value!!)
         }
+        view.setAdapter(valuteList)
         view.updateUI()
     }
 
 
-
-    //не успешный запрос
+    //ошибка
     private fun handleError(error: Throwable) {
-        Log.d("reponce234","error")
+        Log.d("responce","error connection")
+    }
+
+    fun recalculationSum(price:String) {
+        Log.d("price11","$price")
+        if (price != "") {
+            for ((index,element) in valuteList.withIndex()) {
+                val trueValue = recalculationList[index] / valuteList[0]!!.nominal!!
+                valuteList[index]!!.value = price.toInt() / trueValue
+            }
+        }
+        view.updateUI()
     }
 }
