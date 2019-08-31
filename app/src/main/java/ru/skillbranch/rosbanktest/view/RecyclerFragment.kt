@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.list_item.view.*
 import ru.skillbranch.rosbanktest.R
+import ru.skillbranch.rosbanktest.extensions.round
 import ru.skillbranch.rosbanktest.model.POJO.Currency
 import ru.skillbranch.rosbanktest.presenter.CurrencyPresenter
 
@@ -23,6 +24,7 @@ class RecyclerFragment: Fragment(),RecyclerFragmentView {
     private lateinit var mRecyclerView: RecyclerView
     private var mCurrencyPresenter: CurrencyPresenter? = null
     private var mAdapter: CurrencyAdapter? = null
+    var priceBuf = ""
 
 
     override fun onCreateView(
@@ -54,7 +56,8 @@ class RecyclerFragment: Fragment(),RecyclerFragmentView {
     }
 
 
-    fun cliclEditText(price:String){
+    fun clickEditText(price:String){
+        priceBuf = price
         mCurrencyPresenter!!.recalculationSum(price)
     }
 
@@ -74,7 +77,7 @@ class RecyclerFragment: Fragment(),RecyclerFragmentView {
         override fun onBindViewHolder(holder: CurrencyHolder, position: Int) {
             holder.mCharCode.text = data[position]!!.charCode
             holder.mName.text = data[position]!!.name
-            holder.mValue.text = data[position]!!.value.toString()
+            holder.mValue.text = data[position]!!.value!!.round(4).toString()
         }
 
         private inner class CurrencyHolder(mView:View):RecyclerView.ViewHolder(mView){
