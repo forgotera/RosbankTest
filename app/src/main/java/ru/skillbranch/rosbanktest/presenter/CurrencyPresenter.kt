@@ -49,7 +49,7 @@ class CurrencyPresenter(private val view: RecyclerFragment) {
             //сохранение значения для пересчета кол-ва валюты в рублях
             recalculationList.add(value.value!!)
         }
-        //если данные обноаились пересчиваем валюту
+        //если данные обновились пересчитываем валюту
         if(isUpdateData){
             recalculationSum(view.priceBuf)
         }
@@ -64,12 +64,12 @@ class CurrencyPresenter(private val view: RecyclerFragment) {
 
     //пересчет валюты
     fun recalculationSum(price:String) {
-            if (price != "") {
-                for ((index, _) in valuteList.withIndex()) {
-                    val trueValue = price.toInt() / recalculationList[index]
-                    valuteList[index]!!.value = valuteList[index]!!.nominal!! * trueValue
-                }
-                view.updateUI()
+        if (price != "") {
+            for ((index, _) in valuteList.withIndex()) {
+                val trueValue = price.toDouble() / recalculationList[index]
+                valuteList[index]!!.value = valuteList[index]!!.nominal!! * trueValue
             }
+            view.updateUI()
+        }
     }
 }

@@ -27,11 +27,6 @@ class RecyclerFragment: Fragment(),RecyclerFragmentView {
     var priceBuf = ""
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        retainInstance = true
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,9 +58,9 @@ class RecyclerFragment: Fragment(),RecyclerFragmentView {
 
     fun clickEditText(price:String){
         priceBuf = price
-        //fixme после поворота mCurrencyPresenter = null
         mCurrencyPresenter!!.recalculationSum(price)
     }
+
 
 
     private inner class CurrencyAdapter(val data: MutableList<Currency?>): RecyclerView.Adapter<CurrencyAdapter.CurrencyHolder>(){
